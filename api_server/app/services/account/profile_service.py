@@ -56,6 +56,7 @@ def upsert_user_profile(
     recruiter_department: str | None = None,
     recruiter_phone: str | None = None,
     email_signature: str | None = None,
+    user_role: str | None = None,
 ) -> dict[str, Any]:
     profile_ref = repo.users().document(user.uid)
     snapshot = profile_ref.get()
@@ -87,6 +88,8 @@ def upsert_user_profile(
         recruiter_update["emailSignature"] = email_signature
     if recruiter_update:
         payload["recruiterInfo"] = {**current_recruiter, **recruiter_update}
+    if user_role in {"recruiter", "candidate"}:
+        payload["userRole"] = user_role
 
     if snapshot.exists:
         profile_ref.set(payload, merge=True)

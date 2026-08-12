@@ -22,6 +22,7 @@ class UserProfileUpsertRequest(BaseModel):
     recruiterDepartment: str | None = None
     recruiterPhone: str | None = None
     emailSignature: str | None = None
+    userRole: Literal["recruiter", "candidate"] | None = None
 
 
 class UserAvatarUpdateRequest(BaseModel):
