@@ -34,7 +34,7 @@ services:
       test:
         [
           "CMD-SHELL",
-          "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/ready', timeout=5).read()\""
+          "python -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/live', timeout=5).read()\""
         ]
       interval: 20s
       timeout: 8s
@@ -68,9 +68,59 @@ services:
     networks:
       - supporthr
 
+  dozzle:
+    image: amir20/dozzle:latest
+    container_name: supporthr-dozzle
+    ports:
+      - "9999:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: unless-stopped
+    networks:
+      - supporthr
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: supporthr-portainer
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
+    restart: unless-stopped
+    networks:
+      - supporthr
+
+  render-manager:
+    image: python:3.11-alpine
+    container_name: supporthr-render-manager
+    volumes:
+      - ./deploy/render_manager:/app
+    command: ["python", "/app/render_manager.py"]
+    ports:
+      - "9090:9090"
+    restart: unless-stopped
+    networks:
+      - supporthr
+
+  docker-prune:
+    image: docker:latest
+    container_name: supporthr-docker-prune
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    entrypoint: ["sh", "-c", "echo 'Starting initial Docker cleanup...'; docker image prune -a -f; echo 'Cleanup finished. Entering 24h sleep loop...'; while true; do sleep 86400; docker image prune -a -f; done"]
+    restart: unless-stopped
+    networks:
+      - supporthr
+
 volumes:
   redis-data:
+  portainer-data:
 
 networks:
   supporthr:
     driver: bridge
+
+
+
+
