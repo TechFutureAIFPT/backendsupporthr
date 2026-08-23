@@ -1,0 +1,23 @@
+﻿name: backendsupporthr
+services:
+  - name: api
+    type: web
+    dockerfile:
+      dockerfile: api_server/Dockerfile
+    instance_type: nano
+    regions:
+      - fra
+    ports:
+      - port: 8000
+        path: /
+    routes:
+      - path: /
+        port: 8000
+    health_checks:
+      - http:
+          path: /health/live
+          port: 8000
+        interval: 30
+        timeout: 5
+        unhealthy_threshold: 3
+        healthy_threshold: 1

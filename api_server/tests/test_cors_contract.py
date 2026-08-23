@@ -27,6 +27,7 @@ def test_vercel_and_netlify_and_railway_origins_are_allowed_by_cors() -> None:
         "https://app.netlify.app",
         "https://backendsupporthr.up.railway.app",
         "https://myapp.railway.app",
+        "https://backendsupporthr.koyeb.app",
     ]:
         response = client.options(
             "/health/live",

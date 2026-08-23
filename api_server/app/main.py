@@ -208,7 +208,7 @@ def health() -> dict[str, object]:
 app = CORSMiddleware(
     api_app,
     allow_origins=_build_allowed_origins(),
-    allow_origin_regex=r"^(https?://(localhost|127\.0\.0\.1|192\.168\.\d{1,3}\.\d{1,3}|10\.\d{1,3}\.\d{1,3}\.\d{1,3}|172\.(1[6-9]|2\d|3[0-1])\.\d{1,3}\.\d{1,3})(:\d+)?|https://.*\.vercel\.app|https://.*\.netlify\.app|https://.*\.railway\.app|https://.*\.up\.railway\.app|https://.*\.onrender\.com)$",
+    allow_origin_regex=r"^(https?://(localhost|127\.0\.0\.1|192\.168\.\d{1,3}\.\d{1,3}|10\.\d{1,3}\.\d{1,3}\.\d{1,3}|172\.(1[6-9]|2\d|3[0-1])\.\d{1,3}\.\d{1,3})(:\d+)?|https://.*\.vercel\.app|https://.*\.netlify\.app|https://.*\.railway\.app|https://.*\.up\.railway\.app|https://.*\.onrender\.com|https://.*\.koyeb\.app)$",
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allow_headers=[

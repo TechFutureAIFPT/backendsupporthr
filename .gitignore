@@ -48,3 +48,4 @@ ml_pipeline/.venv/
 !api_server/app/models/*.manifest.json
 !railway.json
 !api_server/railway.json
+!koyeb.yaml
