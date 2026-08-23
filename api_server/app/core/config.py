@@ -175,6 +175,8 @@ class Settings:
         self.settings_cache_ttl_seconds = max(30, int(os.getenv("SETTINGS_CACHE_TTL_SECONDS", "600")))
         self.mobile_inbox_cache_ttl_seconds = max(15, int(os.getenv("MOBILE_INBOX_CACHE_TTL_SECONDS", "60")))
         self.template_cache_ttl_seconds = max(30, int(os.getenv("TEMPLATE_CACHE_TTL_SECONDS", "300")))
+        self.mobile_inbox_cache_ttl_seconds = max(15, int(os.getenv("MOBILE_INBOX_CACHE_TTL_SECONDS", "60")))
+        self.template_cache_ttl_seconds = max(30, int(os.getenv("TEMPLATE_CACHE_TTL_SECONDS", "300")))
         self.sync_cache_ttl_seconds = max(30, int(os.getenv("SYNC_CACHE_TTL_SECONDS", "300")))
         self.upload_file_size_limit_mb = max(1, int(os.getenv("UPLOAD_FILE_SIZE_LIMIT_MB", "15")))
         self.default_page_size = _int_env("DEFAULT_PAGE_SIZE", 50, 1, 200)
@@ -208,9 +210,13 @@ class Settings:
 
     @property
     def gemini_api_keys(self) -> List[str]:
+        raw_list = os.getenv("GEMINI_API_KEYS", "")
         raw = [
+            *[part.strip() for part in raw_list.split(",") if part.strip()],
             os.getenv("GEMINI_API_KEY_1"),
             os.getenv("GEMINI_API_KEY_2"),
+            os.getenv("GEMINI_API_KEY_3"),
+            os.getenv("GEMINI_API_KEY_4"),
             os.getenv("GEMINI_API_KEY"),
         ]
         keys = [value.strip() for value in raw if isinstance(value, str) and value.strip()]

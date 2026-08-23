@@ -46,3 +46,5 @@ ml_pipeline/.venv/
 
 # Runtime model manifests are reviewed deployment inputs, unlike other local JSON files.
 !api_server/app/models/*.manifest.json
+!railway.json
+!api_server/railway.json

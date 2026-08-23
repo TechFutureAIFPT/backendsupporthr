@@ -19,9 +19,15 @@ def test_web_frontend_request_id_header_is_allowed_by_cors() -> None:
     assert "x-request-id" in allowed_headers
 
 
-def test_vercel_and_netlify_origins_are_allowed_by_cors() -> None:
+def test_vercel_and_netlify_and_railway_origins_are_allowed_by_cors() -> None:
     client = TestClient(app)
-    for origin in ["https://support-hr.vercel.app", "https://preview-123.vercel.app", "https://app.netlify.app"]:
+    for origin in [
+        "https://support-hr.vercel.app",
+        "https://preview-123.vercel.app",
+        "https://app.netlify.app",
+        "https://backendsupporthr.up.railway.app",
+        "https://myapp.railway.app",
+    ]:
         response = client.options(
             "/health/live",
             headers={
