@@ -36,6 +36,7 @@ def _build_allowed_origins() -> list[str]:
         "http://127.0.0.1:5173",
         "https://www.supporthr-tf.com.vn",
         "https://supporthr-tf.com.vn",
+        "https://cvnatch.netlify.app",
     }
     if settings.frontend_origin:
         origins.add(settings.frontend_origin)
@@ -207,7 +208,7 @@ def health() -> dict[str, object]:
 app = CORSMiddleware(
     api_app,
     allow_origins=_build_allowed_origins(),
-    allow_origin_regex=r"^http://(localhost|127\.0\.0\.1|192\.168\.\d{1,3}\.\d{1,3}|10\.\d{1,3}\.\d{1,3}\.\d{1,3}|172\.(1[6-9]|2\d|3[0-1])\.\d{1,3}\.\d{1,3}):(8081|8090|19006)$",
+    allow_origin_regex=r"^(https?://(localhost|127\.0\.0\.1|192\.168\.\d{1,3}\.\d{1,3}|10\.\d{1,3}\.\d{1,3}\.\d{1,3}|172\.(1[6-9]|2\d|3[0-1])\.\d{1,3}\.\d{1,3})(:\d+)?|https://.*\.vercel\.app|https://.*\.netlify\.app)$",
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allow_headers=[

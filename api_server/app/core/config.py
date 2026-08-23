@@ -21,6 +21,7 @@ DEFAULT_WEB_ORIGINS = [
     "http://127.0.0.1:3000",
     "https://www.supporthr-tf.com.vn",
     "https://supporthr-tf.com.vn",
+    "https://cvnatch.netlify.app",
 ]
 
 
