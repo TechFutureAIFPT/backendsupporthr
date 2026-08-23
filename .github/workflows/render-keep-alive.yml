@@ -1,0 +1,24 @@
+﻿name: Render Backend 24/7 Keep-Alive
+
+on:
+  schedule:
+    # Ping every 10 minutes (Render sleeps after 15 minutes of inactivity)
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  keep-alive:
+    name: Ping Render Health Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Send Heartbeat to Render Backend
+        run: |
+          echo "Sending keep-alive ping to Render backend..."
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 60 https://backendsupporthr.onrender.com/health/live)
+          echo "Render HTTP Status: $HTTP_STATUS"
+          if [ "$HTTP_STATUS" -eq 200 ] || [ "$HTTP_STATUS" -eq 301 ] || [ "$HTTP_STATUS" -eq 302 ]; then
+            echo "✅ Render backend is active and awake 24/7!"
+          else
+            echo "⚠️ Render backend returned $HTTP_STATUS - ping sent to wake it up."
+          fi
