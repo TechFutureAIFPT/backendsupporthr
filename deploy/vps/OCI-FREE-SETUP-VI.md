@@ -44,7 +44,7 @@ backend.supporthr-tf.com.vn -> PUBLIC_VPS_IP
 
 ## 3. Bootstrap K3s
 
-Từ PowerShell hoặc terminal tại `Software/Web/BE`:
+Từ PowerShell hoặc terminal tại `Software/backend/cv-match-api`:
 
 ```bash
 scp -i /path/to/private-key -r deploy/vps ubuntu@YOUR_VPS_IP:/tmp/supporthr-vps

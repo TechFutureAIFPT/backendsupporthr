@@ -78,7 +78,7 @@ JD + CV
 ## 5. Cấu trúc repository
 
 ```text
-Web/BE/
+cv-match-api/
 ├─ api_server/
 │  ├─ app/
 │  │  ├─ api/routes/       HTTP endpoints

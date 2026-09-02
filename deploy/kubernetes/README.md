@@ -11,7 +11,7 @@ This directory contains a Kustomize base plus local and production overlays.
 
 ## Build the image
 
-From `Software/Web/BE`:
+From `Software/backend/cv-match-api`:
 
 ```bash
 docker build -t supporthr-backend:local ./api_server

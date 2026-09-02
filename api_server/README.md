@@ -21,7 +21,7 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 Docker Compose runs the API, Redis and a separate analysis worker. The production path uses
 `ANALYSIS_JOB_MODE=redis`; `in_process` is retained only for local development compatibility.
 
-From the backend repo root (`Software/Web/BE`):
+From the backend repo root (`Software/backend/cv-match-api`):
 
 ```bash
 docker compose build
